@@ -13,10 +13,10 @@ vim.g.maplocalleader = " "
 -- Normal --
 if utils.is_available "smart-splits.nvim" then
   -- Better window navigation
-  map("n", "<C-h>", "<cmd>lua require'smart-splits'.move_cursor_left()<cr>", opts)
-  map("n", "<C-j>", "<cmd>lua require'smart-splits'.move_cursor_down()<cr>", opts)
-  map("n", "<C-k>", "<cmd>lua require'smart-splits'.move_cursor_up()<cr>", opts)
-  map("n", "<C-l>", "<cmd>lua require'smart-splits'.move_cursor_right()<cr>", opts)
+  map("n", "<C-j>", "<cmd>lua require'smart-splits'.move_cursor_left()<cr>", opts)
+  map("n", "<C-k>", "<cmd>lua require'smart-splits'.move_cursor_down()<cr>", opts)
+  map("n", "<C-l>", "<cmd>lua require'smart-splits'.move_cursor_up()<cr>", opts)
+  map("n", "<C-ö>", "<cmd>lua require'smart-splits'.move_cursor_right()<cr>", opts)
 
   -- Resize with arrows
   map("n", "<C-Up>", "<cmd>lua require'smart-splits'.resize_up(2)<cr>", opts)
@@ -27,18 +27,18 @@ end
 
 -- Navigate buffers
 if utils.is_available "bufferline.nvim" then
-  map("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", opts)
-  map("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", opts)
-  map("n", "}", "<cmd>BufferLineMoveNext<cr>", opts)
-  map("n", "{", "<cmd>BufferLineMovePrev<cr>", opts)
+  map("n", "<S-ö>", "<cmd>BufferLineCycleNext<cr>", opts)
+  map("n", "<S-j>", "<cmd>BufferLineCyclePrev<cr>", opts)
+  --map("n", "}", "<cmd>BufferLineMoveNext<cr>", opts)
+  --map("n", "{", "<cmd>BufferLineMovePrev<cr>", opts)
 else
-  map("n", "<S-l>", "<cmd>bnext<CR>", opts)
-  map("n", "<S-h>", "<cmd>bprevious<CR>", opts)
+  map("n", "<S-j>", "<cmd>bnext<CR>", opts)
+  map("n", "<S-ö>", "<cmd>bprevious<CR>", opts)
 end
 
 -- Move text up and down
-map("n", "<A-j>", "<Esc><cmd>m .+1<CR>==gi", opts)
-map("n", "<A-k>", "<Esc><cmd>m .-2<CR>==gi", opts)
+map("n", "<A-k>", "<Esc><cmd>m .+1<CR>==gi", opts)
+map("n", "<A-l>", "<Esc><cmd>m .-2<CR>==gi", opts)
 
 -- LSP
 map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -148,6 +148,7 @@ if not utils.is_available "which-key.nvim" then
   -- Comment
   if utils.is_available "Comment.nvim" then
     map("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", opts)
+    map("n", "<C-k-c>", "<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", opts)
   end
 
   -- Terminal
@@ -171,24 +172,27 @@ end
 
 -- Visual --
 -- Stay in indent mode
-map("v", "<", "<gv", opts)
-map("v", ">", ">gv", opts)
+--map("v", "<", "<gv", opts)
+map("v", "<S-Tab", "<gv", opts)
+--map("v", ">", ">gv", opts)
+map("v", "<Tab>", ">gv", opts)
 
 -- Move text up and down
-map("v", "<A-j>", "<cmd>m .+1<CR>==", opts)
-map("v", "<A-k>", "<cmd>m .-2<CR>==", opts)
+map("v", "<A-k>", "<cmd>m .+1<CR>==", opts)
+map("v", "<A-l>", "<cmd>m .-2<CR>==", opts)
 
 -- Comment
 if utils.is_available "Comment.nvim" then
   map("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", opts)
+  map("v", "<C-k>c", "<esc><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", opts)
 end
 
 -- Visual Block --
 -- Move text up and down
-map("x", "J", "<cmd>move '>+1<CR>gv-gv", opts)
-map("x", "K", "<cmd>move '<-2<CR>gv-gv", opts)
-map("x", "<A-j>", "<cmd>move '>+1<CR>gv-gv", opts)
-map("x", "<A-k>", "<cmd>move '<-2<CR>gv-gv", opts)
+map("x", "K", "<cmd>move '>+1<CR>gv-gv", opts)
+map("x", "L", "<cmd>move '<-2<CR>gv-gv", opts)
+map("x", "<A-k>", "<cmd>move '>+1<CR>gv-gv", opts)
+map("x", "<A-l>", "<cmd>move '<-2<CR>gv-gv", opts)
 
 -- disable Ex mode:
 map("n", "Q", "<Nop>", opts)
@@ -196,10 +200,10 @@ map("n", "Q", "<Nop>", opts)
 function _G.set_terminal_keymaps()
   vim.api.nvim_buf_set_keymap(0, "t", "<esc>", [[<C-\><C-n>]], opts)
   vim.api.nvim_buf_set_keymap(0, "t", "jk", [[<C-\><C-n>]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-W>h]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>j]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
-  vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-W>h]], opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>j]], opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>k]], opts)
+  vim.api.nvim_buf_set_keymap(0, "t", "<C-ö>", [[<C-\><C-n><C-W>l]], opts)
 end
 
 vim.cmd [[
