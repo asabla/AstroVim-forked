@@ -26,10 +26,8 @@ end
 
 -- Navigate buffers
 if utils.is_available "bufferline.nvim" then
-  map("n", "<S-ö>", "<cmd>BufferLineCycleNext<cr>", opts)
-  map("n", "<S-j>", "<cmd>BufferLineCyclePrev<cr>", opts)
-  --map("n", "}", "<cmd>BufferLineMoveNext<cr>", opts)
-  --map("n", "{", "<cmd>BufferLineMovePrev<cr>", opts)
+  map("n", "}", "<cmd>BufferLineMoveNext<cr>", opts)
+  map("n", "{", "<cmd>BufferLineMovePrev<cr>", opts)
 else
   map("n", "<S-j>", "<cmd>bnext<CR>", opts)
   map("n", "<S-ö>", "<cmd>bprevious<CR>", opts)
@@ -147,7 +145,6 @@ if not utils.is_available "which-key.nvim" then
   -- Comment
   if utils.is_available "Comment.nvim" then
     map("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", opts)
-    map("n", "<C-k-c>", "<cmd>lua require('Comment.api').toggle_current_linewise()<cr>", opts)
   end
 
   -- Terminal
@@ -183,7 +180,6 @@ map("v", "<A-l>", "<cmd>m .-2<CR>==", opts)
 -- Comment
 if utils.is_available "Comment.nvim" then
   map("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", opts)
-  map("v", "<C-k>c", "<esc><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", opts)
 end
 
 -- Visual Block --
